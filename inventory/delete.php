@@ -15,33 +15,25 @@ $dbname = "u943769473_immuno";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
 
-$al_userID = $_POST['al_userID'];
-$al_details = $_POST['al_details'];
+$iv_id = $_GET['iv_id'];
 
-
-if($al_userID == null){
+if ($iv_id == null) {
     echo 'anuthorized person';
     return;
+} 
 
-}else if($al_details == null){
-    echo 'details is required!';
-    return;
-}
-
-
-$sql = "INSERT INTO audit_logs (al_userID, al_details) VALUES ('" . $al_userID . "', '" . $al_details . "')";
-
+$sql = "UPDATE iventory SET iv_status='deleted' WHERE iv_id= ".$iv_id." ";
 
 $save = $conn->query($sql);
 if ($save === TRUE) {
-  echo "New record created successfully";
+    echo "Record deleted successfully!";
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();

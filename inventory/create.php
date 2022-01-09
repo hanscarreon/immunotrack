@@ -15,33 +15,35 @@ $dbname = "u943769473_immuno";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
 
-$al_userID = $_POST['al_userID'];
-$al_details = $_POST['al_details'];
+$iv_userID = $_POST['iv_userID'];
+$iv_count = $_POST['iv_count'];
+$iv_name = $_POST['iv_name'];
 
 
-if($al_userID == null){
+if ($iv_userID == null) {
     echo 'anuthorized person';
     return;
-
-}else if($al_details == null){
-    echo 'details is required!';
+} else if ($iv_count == null) {
+    echo 'count is required!';
+    return;
+} else if ($iv_name == null) {
+    echo 'name is required!';
     return;
 }
 
 
-$sql = "INSERT INTO audit_logs (al_userID, al_details) VALUES ('" . $al_userID . "', '" . $al_details . "')";
-
+$sql = "INSERT INTO iventory (iv_userID, iv_count, iv_name) VALUES ('" . $iv_userID . "', '" . $iv_count . "', '" . $iv_name . "')";
 
 $save = $conn->query($sql);
 if ($save === TRUE) {
-  echo "New record created successfully";
+    echo "New record created successfully";
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
