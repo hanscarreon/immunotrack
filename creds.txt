@@ -1,0 +1,31 @@
+Username u934258034_vaccsched
+password VaccSched091321
++user:u934258034.vaccinesched
+password:Vaccinesched123
+hostname:wehostngnet.com
+port:21
+
+
+Username u934258034_vaccsched
+password VaccSched091321
+Lala
+https://wehostngnet.com/adminer/
+
+  $FIRST_NAME = $_POST['FIRST_NAME'];
+    $LAST_NAME = $_POST['LAST_NAME'];
+    $VACCINE = $_POST['VACCINE'];
+    $VACCINE_DATE = $_POST['VACCINE_DATE'];
+    $BIRTHDATE = $_POST['BIRTHDATE'];
+    $FIRST_NAME2 = $_POST['FIRST_NAME2'];
+    $LAST_NAME2 = $_POST['LAST_NAME2'];
+    $CONTACT_NUMBER = $_POST['CONTACT_NUMBER'];
+    $ADDRESS = $_POST['ADDRESS'];
+    $BRGY = $_POST['BRGY'];
+    $CITY = $_POST['CITY'];
+
+
+
+
+db : u943769473_immuno
+user: u943769473_immunouser
+pass: xI4t#e^s@
