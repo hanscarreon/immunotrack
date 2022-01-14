@@ -28,7 +28,7 @@ if($from == null && $to == null){
 // SELECT * FROM audit_logs JOIN accounts ON accounts.ID=audit_logs.al_userID 
 //     WHERE audit_logs.al_status !='deleted' AND audit_logs.al_created_at >= '2021-01-01' AND audit_logs.al_created_at <= '2022-01-30'
 
-if( ($from == 'all' && $to == 'all') ||  ($from == '' && $to == '')){
+if( ($from == 'all' && $to == 'all') ||  ($from == '' && $to == '') ){
     $sql = "SELECT * FROM audit_logs JOIN accounts ON accounts.ID=audit_logs.al_userID WHERE audit_logs.al_status !='deleted'";
 }else{
     $sql = "SELECT * FROM audit_logs JOIN accounts ON accounts.ID=audit_logs.al_userID 

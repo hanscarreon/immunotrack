@@ -8,7 +8,7 @@
     
         $conn = mysqli_connect('localhost', 'u943769473_immunouser', 'xI4t#e^s@','u943769473_immuno'); 
 	
-    $Q = "SELECT * FROM children";
+    $Q = "SELECT * FROM children2 WHERE  ch_status !='deleted' ";
     $sched = mysqli_query($conn, $Q);
     $sched_r = array();
     while($row = $sched->fetch_assoc()) {$sched_r[] = $row;}

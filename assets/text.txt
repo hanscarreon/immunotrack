@@ -1,0 +1,72 @@
+import urllib
+import urllib.parse
+import urllib.request
+import json
+import datetime
+import time
+x = datetime.datetime.now()
+timenow=int(x.strftime("%H%M"))
+import serial
+SerialData = serial.Serial('/dev/ttyUSB0', 9600)
+time.sleep(2)
+
+Start = 800
+def updatephp(C,V,ID):
+    url='https://immunotrack.online/vaccinesched/update.php?Column='+C+"&Value="+V+"&ID="+ID
+    response = urllib.request.urlopen(url)
+    print(url)
+    print('update')
+def SendMsg(no,msg):
+    strg="@"+no+"#"+msg+"$"
+    SerialData.write(bytes(strg, "utf-8"))
+    time.sleep(20)
+    print(strg)
+    print('sent')
+while True:
+    try:
+        response = urllib.request.urlopen('https://immunotrack.online/vaccinesched/get_receivers.php')
+        data = json.load(response)
+        print('ok')
+        
+        for child in data['children']:
+            x = datetime.datetime.now()
+            x2 = datetime.datetime.now()+datetime.timedelta(days = 2)
+            x3 = datetime.datetime.now()
+            timenow=int(x.strftime("%H%M"))
+            datenow=x.strftime("%m/%d/%Y")
+            datenow2=x2.strftime("%m/%d/%Y")
+            print('1')
+            Name=child['ch_first_name']+" "+child['ch_last_name']
+            print('2')
+            SENT0,SENT1,SENT2=child['SENT0'],child['SENT1'],child['SENT2']
+            print('3')
+            Vdate=child['ch_vac_date']
+            print('4')
+            print(child['ch_id '])
+            print('5')
+            ID=child['ch_id ']
+            print('6')
+            cp=child['ch_number']
+            print(Name)
+            print(cp)
+            if SENT0=="":
+                print('sen0')
+                msg1="Your child, "+Name+", is scheduled for "+child['ch_vaccine']+" vaccination on "+Vdate+". Your ID is "+ID
+                SendMsg(cp,msg1)
+                updatephp("SENT0","SENT",ID)
+            if timenow>Start and SENT1=="" and datenow==Vdate:
+                print('sen1')
+                msg2="Your child, "+Name+", is scheduled for "+child['ch_vaccine']+" vaccination today."
+                SendMsg(cp,msg2)
+                updatephp("SENT1","SENT",ID)
+            if timenow>Start and SENT2=="" and datenow2==Vdate:
+                print('sen2')
+                msg3="Your child, "+Name+", is scheduled for "+child['ch_vaccine']+" vaccination 2 days from now."
+                SendMsg(cp,msg3)
+                updatephp("SENT2","SENT",ID)
+            #print(datenow,datenow2)
+        time.sleep(5)
+    except:
+        pass
+    
+print(type(data),data['children'][0]['ID'])

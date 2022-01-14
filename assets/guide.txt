@@ -1,0 +1,3 @@
+web : https://www.hostinger.ph/
+
+UPDATE `children2` SET `ch_status` = 'deleted'

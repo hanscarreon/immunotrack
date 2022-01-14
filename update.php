@@ -9,7 +9,7 @@
 	$V = $_GET['Value'];
 	$ID = $_GET['ID'];
     
-    $login = mysqli_query($conn, "UPDATE children SET ".$C."='".$V."' WHERE ID = '".$ID."'"); 
+    $login = mysqli_query($conn, "UPDATE children2 SET ".$C."='".$V."' WHERE ch_id  = '".$ID."'"); 
     $login_r = array();
     
 ?>
